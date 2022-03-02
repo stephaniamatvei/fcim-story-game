@@ -19,24 +19,30 @@ For this reason, the Dean of the faculty, Mr. Ciorbă, is organizing a special e
     
 = Accepted
 # CLEAR
-Thanks for joining! The details to the private event will be sent shortly.
+Congrats, you're in for a really good time. You wonder what's gonna happen at the party?
     * [Next] -> PARTY_TIME
 = Declined
 # CLEAR
 Think twice, Mr. Pumpkin has prepared something special.
     * [HELL YES! sounds convincing] -> Accepted
-    * [NO, even this doesn't intrigue me] -> END 
+    * [NO, even this doesn't intrigue me] 
+    You choose to go home and later found out what happened from other students. Maybe you should've stayed to witness all the interesting stuff?
+    -> END 
 
 
 ========== PARTY_TIME ==========
-
-Welcome! The event will start with Mr. Ciorbă's and Mr. Pumpkin's speeches.
+Finally, the day has come. 
+You go to the party and find all your friends. After a while, the dreaded speeches start. You start to nod off...
 #IMAGE: images/2.jpg
     * [Next] -> Speech
 
 = Speech
 # CLEAR
-The rector and the dean of the faculty have finished their speeches and now they left the event to let the students <b>have fun :)</b>
+You awaken just as somebody begins to speak on stage. You catch the end of their speech: "... We are very proud to have all of you here for the 55th anniversary of our university, to celebrate together the wonderful achievements, people, and values that unite us…" Yeah, no wonder you fell asleep in the first place.
+
+But now that everyone's done with the speeches, it's time for the students to have a <b> bit of fun! >:) </b> 
+
+Are you up for it or have the speeches sucked all the party spirit our of you?
     * [Stay] -> Beginning
     * [Leave] 
         You choose to go home and later found out what happened from other students. Maybe you should've stayed to witness all the interesting stuff?
@@ -50,50 +56,53 @@ After 10 minutes all the lights were turned off, doors locked and someone starte
     * [Wait until someone asks about the purpose of the action]
     
     ~ Luck++
-    * [Ask first what this is for]
+    * [Ask what this is]
     
     ~ Courage ++
-    * [I'm calling the police]
-    We are warned Rule! You can't call the police or anyone else to escape Rule! You will only come out at the end of the game Rule! You have 1 hour! No use of calculators!!!
+    * [Call the damn cops!]
+    Damn! You notice there's no reception, and are about to ask someone else if they can call someone-- but it seems you've been notices:
+    VOICE THROUGH THE SPEAKERS: <b> No phones allowed! No cheating allowed! Consider this your last warning, student!
     #IMAGE: images/4.jpg
 
--  This is a unique and historical experience. You will have to leave as soon as possible, as only the first student will be spared.
+-  VOICE THROUGH THE SPEAKERS: <b>Now, welcome to our special event. This is a chance for each of you to prove your problem-solving abilities! After all, isn't this the foundation of our beloved university? Follow the instructions, and good luck! See you at the end!
+What the hell is going on?! You will have to leave as soon as possible!
     Of course, <b>if you'll reach it</b> on time ...
-    * [Think a little bit] -> Hello_Bostan
-    * [Listen to the enumerated instructions] -> Listen_To_The_Instructions
+    * [Wait! you've heard that phrase before!] -> Hello_Bostan
+    * [Whatever, listen to the enumerated instructions] -> Listen_To_The_Instructions
     
 = Hello_Bostan
 # CLEAR
 ~ SocialState++
-hmm...
-    * [Ok, I think I know who this is!] -> MrBostan_Revealed
+Shivers go down your spine. The Special Math course exams flash through your mind. Of course you know you've heard this so many times! The mastermind behind all of this is:
+    * [Mr. Bostan?!] -> MrBostan_Revealed
+    * [Mrs. Cojuhari?!] No, that's not it. -> Listen_To_The_Instructions
     
 = MrBostan_Revealed
 # CLEAR
-Mr. Bostan ??
+<i>Of course it's Mr. Bostan! If this challenge is like his exams, you have a HUGE problem on your hands. You ask if it's Mr. Bostan talking.
 #IMAGE: images/5.jpg
-<i>Everybody understands that this is Mr. Bostan</i> 
-    <b>PROVE IT!</b> -> Prove_It
+
+    VOICE THROUGH THE SPEAKERS:<b>You think you know who I am? Prove it!</b> -> Prove_It
 
 = Prove_It
-# CLEAR
-    * [Say a reason]
-    Bostan: Then you have to be even more motivated to get out of the block <b>first</b>. -> Listen_To_The_Instructions
+
+    * [Say your reason]
+    Mr. Bostan: <b> Well, it's no formal proof, but I appreciate your attempt. Keep doing that and you might win!  -> Listen_To_The_Instructions
     ~ Courage++
     
     * [I'm afraid of what he might say back]
-    Bostan: I'll give you a hint. That's me. 
+    Mr. Bostan: <b> I'll give you a hint. That's me. 
         -> Listen_To_The_Instructions
     ~ Luck++
     
 = Listen_To_The_Instructions
 # CLEAR
-Now listen to the enumerated instructions! 
+<b> Now listen to the enumerated instructions! 
     *[Start the game] -> START_THE_GAME
     
 
 ========== START_THE_GAME ==========
-Now the game will begin! Get ready!
+<b>Now the game will begin! Get ready! And remember, NO CHEATING!
     *[Ok, let's do it! Show me THE FIRST INSTRUCTION] -> Instruction_1
     
 = Instruction_1
@@ -103,17 +112,33 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
     *[Start the time] -> Start_Time
 
 = Start_Time
-# CLEAR
 #IMAGE: images/7.jpg
-    *[don't cheat] -> Do_Not_Cheat
-    *[cheat] -> Cheat
+    +[Don't cheat] -> Do_Not_Cheat
+    +[Try to cheat] -> Cheat
     
     = Do_Not_Cheat
-    # CLEAR
-    I will calculate it by myself cause I'm confident in me thanks to all the math lessons I had in the 1st year!
+    I will calculate it by myself cause I'm confident in me thanks to all the Calculus lessons I had in the 1st year! The answer is, obviously:
     ~ Time++
     #IMAGE: images/9.png
-        *[Done!] -> Done1
+    
+        + [4370244523] 
+            Apparently those Calculus lessons weren't as clear as you remember. 
+            ~ Time++
+        + [-130] Come on, man. Really?
+            ~ Time++
+        + [198308604] Wow, you really payed attention last year! Nice!
+            -> Done1
+        + [Uhh... no idea. Random choice! (Feels like a midterm flashback...)]
+            {
+            - RANDOM(1, 3) == 3 : -> Done1
+            - else : 
+                ~ Time++
+                No luck!
+            } 
+            
+        - Try again. -> Start_Time
+        
+        
     = Done1
     # CLEAR
     It was complicated, but I did it!
@@ -121,33 +146,37 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
     ~ Time++
     ~ Time++
     #IMAGE: images/10.png
-        *[next step] -> Common
+        *[Next step] -> Common
     
     = Cheat
     # CLEAR
-    I will use a calculator and will try to hide
+    I will use a calculator and will try to hide. Hopefully no one will notice me.
     ~ Time ++
     ~ SocialState--
     ~ Time++
     #IMAGE: images/8.jpg
-        *[Done!] -> Done2
+    {
+    - RANDOM(1, 10) > 7 : -> Done2
+    - else : You got caught cheating! You are eliminated!
+            -> END
+    }  
+
     = Done2
     # CLEAR
     I got the result very fast!
     #IMAGE: images/10.png
-        *[next step] -> Common
+        *[Next step] -> Common
     
     = Common
     # CLEAR
-    Somebody from students noticed that you have the result and wants to take your result, which is not really pleasant.
+    A student noticed that you have the result and wants to take it, which is not really pleasant. You can defend your result, which will take longer, or share the result.
     ~ Time++
     #IMAGE: images/11.jpg
-    *[say NO concretely!] -> Disagree
-    *[He will get the result anyway, if not from me, than from someone else] -> Agree
+    *[Say NO directly!] -> Disagree
+    *[He will get the result anyway, why not share?] -> Agree
     
     = Agree
     # CLEAR
-    ~ Luck++
     ~ Time++
         *[Go to the computer] 
         #IMAGE: images/14.png
