@@ -25,7 +25,7 @@ Congrats, you're in for a really good time. You wonder what's gonna happen at th
 # CLEAR
 Think twice, Mr. Pumpkin has prepared something special.
     * [HELL YES! sounds convincing] -> Accepted
-    * [NO, even this doesn't intrigue me] 
+    * [NO, even this doesn't intrigue you] 
     You choose to go home and later found out what happened from other students. Maybe you should've stayed to witness all the interesting stuff?
     -> END 
 
@@ -60,6 +60,7 @@ After 10 minutes all the lights were turned off, doors locked and someone starte
     
     ~ Courage ++
     * [Call the damn cops!]
+    # CLEAR
     Damn! You notice there's no reception, and are about to ask someone else if they can call someone-- but it seems you've been notices:
     VOICE THROUGH THE SPEAKERS: <b> No phones allowed! No cheating allowed! Consider this your last warning, student!
     #IMAGE: images/4.jpg
@@ -90,7 +91,7 @@ Shivers go down your spine. The Special Math course exams flash through your min
     Mr. Bostan: <b> Well, it's no formal proof, but I appreciate your attempt. Keep doing that and you might win!  -> Listen_To_The_Instructions
     ~ Courage++
     
-    * [I'm afraid of what he might say back]
+    * [You're afraid of what he might say back]
     Mr. Bostan: <b> I'll give you a hint. That's me. 
         -> Listen_To_The_Instructions
     ~ Luck++
@@ -103,7 +104,7 @@ Shivers go down your spine. The Special Math course exams flash through your min
 
 ========== START_THE_GAME ==========
 <b>Now the game will begin! Get ready! And remember, NO CHEATING!
-    *[Ok, let's do it! Show me THE FIRST INSTRUCTION] -> Instruction_1
+    *[Ok, let's do it! Get ready for THE FIRST INSTRUCTION] -> Instruction_1
     
 = Instruction_1
 # CLEAR
@@ -112,12 +113,14 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
     *[Start the time] -> Start_Time
 
 = Start_Time
+# CLEAR
 #IMAGE: images/7.jpg
     +[Don't cheat] -> Do_Not_Cheat
     +[Try to cheat] -> Cheat
     
     = Do_Not_Cheat
-    I will calculate it by myself cause I'm confident in me thanks to all the Calculus lessons I had in the 1st year! The answer is, obviously:
+    # CLEAR
+    You will calculate it by yourself cause you're confident in your math skills thanks to all the Calculus lessons you had in the 1st year! The answer is, obviously:
     ~ Time++
     #IMAGE: images/9.png
     
@@ -128,7 +131,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
             ~ Time++
         + [198308604] Wow, you really payed attention last year! Nice!
             -> Done1
-        + [Uhh... no idea. Random choice! (Feels like a midterm flashback...)]
+        + [Uhh... you have no idea. Random choice! (Probably feels to you like a midterm flashback...)]
             {
             - RANDOM(1, 3) == 3 : -> Done1
             - else : 
@@ -141,7 +144,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
         
     = Done1
     # CLEAR
-    It was complicated, but I did it!
+    It was complicated, but you did it!
     ~ SocialState++
     ~ Time++
     ~ Time++
@@ -150,7 +153,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
     
     = Cheat
     # CLEAR
-    I will use a calculator and will try to hide. Hopefully no one will notice me.
+    You will use a calculator and will try to hide. Hopefully no one will notice you.
     ~ Time ++
     ~ SocialState--
     ~ Time++
@@ -163,7 +166,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
 
     = Done2
     # CLEAR
-    I got the result very fast!
+    You got the result very fast!
     #IMAGE: images/10.png
         *[Next step] -> Common
     
@@ -172,7 +175,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
     A student noticed that you have the result and wants to take it, which is not really pleasant. You can defend your result, which will take longer, or share the result.
     ~ Time++
     #IMAGE: images/11.jpg
-    *[Say NO directly!] -> Disagree
+    *[You say NO directly!] -> Disagree
     *[He will get the result anyway, why not share?] -> Agree
     
     = Agree
@@ -198,11 +201,11 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
         # CLEAR
         In that room there are already some students including that student who offended you.
         Nobody knows from where the problem comes...
-            *[I will wait until somebody has an idea, and stole the opportunity, so be the first (as that student did to me)] -> Stole_The_Opportunity
-            *[I will wait until somebody solves the problem]
+            *[You will wait until somebody has an idea, and stole the opportunity, so be the first (as that student did to you)] -> Stole_The_Opportunity
+            *[You will wait until somebody solves the problem]
             To be continued...
             -> END
-            *[I will try to come up with a solution]
+            *[You will try to come up with a solution]
             To be continued...
             -> END
         
