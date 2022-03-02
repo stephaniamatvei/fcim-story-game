@@ -14,29 +14,36 @@ This year the <b>Faculty of Computers, Informatics and Microelectronics</b> of t
 For this reason, the Dean of the faculty, Mr. Ciorbă, is organizing a special event where each and every FCIM student is invited!
 #IMAGE: images/1.png
 
-    * [Accept the invitation] -> Accepted 
+    * [Accept the invitation] ->  Accepted 
     * [Refuse the invitation] -> Declined 
     
 = Accepted
+# CLEAR
 Thanks for joining! The details to the private event will be sent shortly.
     * [Next] -> PARTY_TIME
 = Declined
+# CLEAR
 Think twice, Mr. Pumpkin has prepared something special.
     * [HELL YES! sounds convincing] -> Accepted
     * [NO, even this doesn't intrigue me] -> END 
 
 
 ========== PARTY_TIME ==========
+
 Welcome! The event will start with Mr. Ciorbă's and Mr. Pumpkin's speeches.
 #IMAGE: images/2.jpg
     * [Next] -> Speech
 
 = Speech
+# CLEAR
 The rector and the dean of the faculty have finished their speeches and now they left the event to let the students <b>have fun :)</b>
     * [Stay] -> Beginning
-    * [Leave] -> END
+    * [Leave] 
+        You choose to go home and later found out what happened from other students. Maybe you should've stayed to witness all the interesting stuff?
+        -> END
 
 = Beginning
+# CLEAR
 After 10 minutes all the lights were turned off, doors locked and someone started giving escape instructions through the speakers of the room.
 #IMAGE: images/3.jpg
 
@@ -56,17 +63,20 @@ After 10 minutes all the lights were turned off, doors locked and someone starte
     * [Listen to the enumerated instructions] -> Listen_To_The_Instructions
     
 = Hello_Bostan
+# CLEAR
 ~ SocialState++
 hmm...
     * [Ok, I think I know who this is!] -> MrBostan_Revealed
     
 = MrBostan_Revealed
+# CLEAR
 Mr. Bostan ??
 #IMAGE: images/5.jpg
 <i>Everybody understands that this is Mr. Bostan</i> 
     <b>PROVE IT!</b> -> Prove_It
 
 = Prove_It
+# CLEAR
     * [Say a reason]
     Bostan: Then you have to be even more motivated to get out of the block <b>first</b>. -> Listen_To_The_Instructions
     ~ Courage++
@@ -77,6 +87,7 @@ Mr. Bostan ??
     ~ Luck++
     
 = Listen_To_The_Instructions
+# CLEAR
 Now listen to the enumerated instructions! 
     *[Start the game] -> START_THE_GAME
     
@@ -86,21 +97,25 @@ Now the game will begin! Get ready!
     *[Ok, let's do it! Show me THE FIRST INSTRUCTION] -> Instruction_1
     
 = Instruction_1
+# CLEAR
 Solve the given <b>formula</b> to enter the <b>computer's password</b> where you will find the next instruction.
 #IMAGE: images/6.png
     *[Start the time] -> Start_Time
 
 = Start_Time
+# CLEAR
 #IMAGE: images/7.jpg
     *[don't cheat] -> Do_Not_Cheat
     *[cheat] -> Cheat
     
     = Do_Not_Cheat
+    # CLEAR
     I will calculate it by myself cause I'm confident in me thanks to all the math lessons I had in the 1st year!
     ~ Time++
     #IMAGE: images/9.png
         *[Done!] -> Done1
     = Done1
+    # CLEAR
     It was complicated, but I did it!
     ~ SocialState++
     ~ Time++
@@ -109,6 +124,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
         *[next step] -> Common
     
     = Cheat
+    # CLEAR
     I will use a calculator and will try to hide
     ~ Time ++
     ~ SocialState--
@@ -116,11 +132,13 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
     #IMAGE: images/8.jpg
         *[Done!] -> Done2
     = Done2
+    # CLEAR
     I got the result very fast!
     #IMAGE: images/10.png
         *[next step] -> Common
     
     = Common
+    # CLEAR
     Somebody from students noticed that you have the result and wants to take your result, which is not really pleasant.
     ~ Time++
     #IMAGE: images/11.jpg
@@ -128,6 +146,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
     *[He will get the result anyway, if not from me, than from someone else] -> Agree
     
     = Agree
+    # CLEAR
     ~ Luck++
     ~ Time++
         *[Go to the computer] 
@@ -135,16 +154,19 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
         -> Not_The_First
         
     = Not_The_First
+    # CLEAR
     You are not the first, you should wait your turn
     ~ Time++
     ~ Time++
         *[Waited] -> Next_Instruction
     
     = Next_Instruction
+    # CLEAR
     Open the file with the next instruction, it contains the location of the station, light box 2 instruction: the light in the building must be turned on 
         *[Next] -> Next 
         
         = Next
+        # CLEAR
         In that room there are already some students including that student who offended you.
         Nobody knows from where the problem comes...
             *[I will wait until somebody has an idea, and stole the opportunity, so be the first (as that student did to me)] -> Stole_The_Opportunity
@@ -156,6 +178,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
             -> END
         
         = Stole_The_Opportunity
+        # CLEAR
         Announcement: You have been noticed while cheating, you broke the rule.
         #IMAGE: images/18.jpg
             *[Acknowledge the mistake and ask for forgiveness]
@@ -183,10 +206,12 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
                 -> END
             
     = Disagree
+    # CLEAR
     ~ Courage++
     #IMAGE: images/13.jpeg
         *[Go to the computer] -> First
     = First
+    # CLEAR
     ~ Time++
     #IMAGE: images/14.png
         *[Next]
@@ -194,6 +219,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
         ~ Time++
         -> Next3
     = Next3
+    # CLEAR
     Open the file with the next instruction, it contains the location of the station, light box 2 instruction: the light in the building must be turned on.
     
     <i>To be continued...</i>
