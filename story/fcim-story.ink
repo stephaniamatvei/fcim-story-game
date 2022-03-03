@@ -203,11 +203,10 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
         Nobody knows from where the problem comes...
             *[You will wait until somebody has an idea, and stole the opportunity, so be the first (as that student did to you)] -> Stole_The_Opportunity
             *[You will wait until somebody solves the problem]
-            To be continued...
-            -> END
+            ->Instruction_2.someElseSolvesLightChallenge
             *[You will try to come up with a solution]
-            To be continued...
-            -> END
+            ->Instruction_2.solveLightChallengeByYourself
+
         
         = Stole_The_Opportunity
         # CLEAR
@@ -254,9 +253,334 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
     # CLEAR
     Open the file with the next instruction, it contains the location of the station, light box 2 instruction: the light in the building must be turned on.
     
-    <i>To be continued...</i>
+    *[Try to solve it yourself] -> Instruction_2.solveLightChallengeByYourself
+    *[Wait for someone else to solve it] -> Instruction_2.someElseSolvesLightChallenge
+    
+    
     -> DONE
     
-    ~ Luck++
+
+===Instruction_2
+
+=solveLightChallengeByYourself
+# CLEAR
+#IMAGE: images/15.jpg
+~Courage = Courage + 2
+You think about it a little. The panel seems suspicious enough. But most suspicious you find the:
+
++[Buttons on the panel] -> wrongChoice
+    
+    
++[Cables in the panel box] -> seeCable
+    
++[Cables coming out of the panel box] -> wrongChoice
+
+=wrongChoice
+Hm... After a close inspection, you don't see anything weird.
+    ~Time++
+    * [Try again]-> solveLightChallengeByYourself
+
+=seeCable
+You notice one cut cable has been hidden in the others. Better remember how it looks like!
+    # IMAGE images/cable.png
+    *[Now try to find a cable to replace it...]->findCable
+    
+=findCable
+# CLEAR 
+# IMAGE: images/cables.jpg
+Another cable of the same type must be found. Luckily, you find this cable mess in some corner of the room. Uh-oh! Which cable did we need again? 
+
++[Red]
+    Nope. Didn't work. You just wasted a bit of time. Try to remember!
+    ~Time++
+    -> findCable
++[Black]
+    Nope. Didn't work. You just wasted a bit of time. Try to remember!
+    ~Time++
+    -> findCable
++[Orange]
+    Orange seemed familiar.Hm, still didn't work. You just wasted a bit of time. Try to remember!
+    ~Time++
+    -> findCable
++[Yellow]
+    Yes! That was it. Good that you're so attentive. You replace the cable and...
+    ~SocialState++
+     -> theLightIsON
+
+
+
+=someElseSolvesLightChallenge
+# CLEAR
+# IMAGE: images/16.jpg
+A smart student found the problem instead and solved it. How lucky for you. Welp, you just want to get out of here, after all, why bother?
+~Luck++
+~Time = Time + 4
+
+-> theLightIsON
+
+
+=theLightIsON
+The light is on. Congratulations! You can move to your final challenge of the day.
+*[Move to challenge 3]->Instruction_3
+
+
+
+
+
+
+==== Instruction_3
+You must open the door, you have {(15- Time)*4}  minutes left;You need to find the key.
+    *[Next] -> TheProblem
+    =TheProblem
+        You find a note on the door: <i>The answer to following problem is the auditorium where the key to the door is located</i>
+    
+        Below you see a problem wrriten on a piece of paper
+        # IMAGE: images/21.png
+        * [Search the keys in auditoriums by yourself] -> Search_alone
+        * [Gather a team and search every auditorium] -> Gather_team
+        * [Solve the problem]-> Solve_problem
+    
+   
+=Search_alone
+# CLEAR
+ ~Luck++
+{
+   
+    - Luck>Courage:
+        ->Finds_key
+    -else:
+        ->Someone_solved
+}
+    
+
+=Finds_key
+# CLEAR
+    You find the key in the first auditorium you chose and won the contest
+    {
+    - SocialState>=5:
+        You are named as the best student, 
+        you receive a prize
+         # IMAGE: images/30.jpg
+        -> END
+        
+    -else:
+        You are just awarded
+         # IMAGE: images/31.jpg
+        -> END
+    }
+ 
+=Someone_solved
+    Someone else solved the problem while you were searching for the key.
+    You are one of the students who tried to win.
+      -> END
+      
+=Gather_team
+# IMAGE: images/22.jpg
+    ~SocialState++
+    {
+   
+    - Luck>Courage:
+        ~Time++
+        ->Divide_rooms
+    -else:
+        ->Another_team
+    }
+    
+    
+=Divide_rooms
+ # CLEAR
+    You divide the auditoriums between the team members and everyone searches
+    One of the team members find the key
+     {
+    - SocialState>=6 and Courage>3:
+        Your team was awarded and declared the best PBL team and the bravest
+         # IMAGE: images/32.jpg
+        -> END
+    - SocialState>=6 and Courage<=3:  
+        Your team was awarded and declared the best PBL team
+         # IMAGE: images/34.jpg
+        -> END
+    -else:
+        Your team was just  awarded
+         # IMAGE: images/33.png
+        -> END
+    }
+
+=Another_team   
+ # CLEAR
+    Another team found the key
+     # IMAGE: images/28.jpg
+    *[next] You are one of the students who tried to win
+    -> END
+    
+=Solve_problem
+     * [Discuss the problem with others] -> Discuss
+     * [Solve by yourself] -> Solving_Problem
+    
+=Solving_Problem
+    # CLEAR
+    You take some time to concentrare on the problem
+    # IMAGE: images/21.png
+    *[Next]->findingSolution
+    =findingSolution
+        After some 12 minutes of calculations you manage to find the right solution.That's right! Its auditorium 85!
+        ~Courage++
+        You succesfully solved the problem , and found the key
+        **[Next]->winner
+        =winner
+        # CLEAR
+            {
+            - SocialState>=5 and Courage<=4:
+                You are named as the best student, 
+                you receive a prize
+                 # IMAGE: images/30.jpg
+                -> END
+            - SocialState<5 :  
+                You are just awarded
+                 # IMAGE: images/31.jpg
+                -> END
+            -SocialState>=5 and Courage>4:
+                You are named as the best student and the the bravest, 
+                you receive a prize
+                 # IMAGE: images/29.png
+                -> END
+            }
+    
+=Discuss
+    # CLEAR
+    { -not Elevator:
+        It helped you find the solution, but you are not the first to find the solution
+    } 
+
+    +[Run towards the auditorium]->Running
+    
+    *[Pick the elevator]->Elevator
+    
+    
+=Elevator
+
+~ temp Probability = RANDOM(1, 10)
+    {
+    - Probability>=7 :
+        The elevator was somewhat empty and you managed to be first
+         # IMAGE: images/27.jpg
+         *[Next]->winning
+        
+    - else :
+        # CLEAR
+        ~Time++
+        Unfortunately the elevators are too crowded and you fail to use them
+         # IMAGE:  images/26.jpg
+        ->Discuss
+    
+    }
+     =winning
+        You found the key in room 85
+         # IMAGE: images/28.jpg
+         *[Next]->award
+        =award 
+        # CLEAR
+        You won and was awarded
+         # IMAGE: images/29.png
+         
+        {
+        - SocialState>=5 and Courage<=2:
+           You are named as the best student, 
+            you receive a prize
+             # IMAGE: images/30.jpg
+            -> END
+        - SocialState<5 :  
+            You are just awarded
+             # IMAGE: images/31.jpg
+            -> END
+        -SocialState>=5 and Courage>2:
+            You are named as the best student and the the bravest,
+            you receive a prize
+             # IMAGE: images/29.png
+            -> END
+        }
+         
+
+=Running
+    # Clear
+    While running you encounter Mr Dean greeting you and asking you to bring him a glass of water
+     # IMAGE:  images/25.jpg
+     ~ temp flag=1
+    * [Accept]   ->statusIncrease
+  
+    * [Decline] ->badChoice
+
+    =statusIncrease
+            ~SocialState++
+            ~Lives++ 
+            ~SocialState++
+            ~Time++ 
+            ~Luck++ 
+            ->EnteringRoom
+    =badChoice
+    
+            ~Lives--
+            ->EnteringRoom
+    
+    =EnteringRoom
+    # CLEAR
+    
+    You enter the room and find the key
+    {
+        - Time>15:
+            Time is out, you didn't won 
+            -> END
+        -else: ->MrDean_Meeting
+        
+    }
+    
+=MrDean_Meeting  
+    
+    While returning the key falls and a student wants to steal the key from you
+    ~Time++
+    Mr Dean interferes. 
+        {
+            - Time>15:
+                Time is out, you didn't won 
+                -> END
+        }
+    *[Next]The student wants to convince its you who stole the key from him
+      {
+        - Lives>1:
+            Mr Dean actually saw how the key fell from you pocket as he was drinking his water.
+            You succesfuly opened the door
+            - SocialState>=7 and Courage<=4:
+                You are named as the best student, 
+                    you receive a prize
+                 # IMAGE:  images/30.jpg
+                -> END
+            - SocialState<7 :
+                You are just awarded
+                 # IMAGE:  images/31.jpg
+                -> END
+            - SocialState>=7 and Courage>4:
+                You are named as the best student and the the bravest, you receive a prize
+                 # IMAGE:  images/29.png
+                -> END
+        - else:
+            Mr Dean Believes the student and you are disqualified
+            }
+            -> END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 -> END

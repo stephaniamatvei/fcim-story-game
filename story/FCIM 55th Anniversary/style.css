@@ -4,7 +4,8 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-weight: lighter;
     background: white;
-    overflow: hidden;
+	overflow-y:scroll;
+    overflow-x:scroll;	
 }
 
 body.switched {
@@ -71,9 +72,7 @@ h2 {
     display: block;
     margin: 0;
     padding: 0;
-    -webkit-overflow-scrolling: touch;
-    overflow: scroll;
-    overflow-x: hidden;
+    
     height: 100%;
     width: 100%;
     top: 0;
@@ -130,9 +129,10 @@ strong {
 }
 
 img {
-    display: block;
-    margin: 0 auto;
-    max-width: 100%;
+ display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
 
 .container .hide {
