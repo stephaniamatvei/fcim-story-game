@@ -2,7 +2,7 @@
 
 VAR Courage = 0
 VAR Luck = 0
-VAR SocialState = 0
+VAR SocialState = 3
 VAR Time = 0
 VAR Lives = 1
 
@@ -27,6 +27,7 @@ Think twice, Mr. Pumpkin has prepared something special.
     * [HELL YES! sounds convincing] -> Accepted
     * [NO, even this doesn't intrigue you] 
     You choose to go home and later found out what happened from other students. Maybe you should've stayed to witness all the interesting stuff?
+    <b>The end. <\b>
     -> END 
 
 
@@ -46,6 +47,7 @@ Are you up for it or have the speeches sucked all the party spirit our of you?
     * [Stay] -> Beginning
     * [Leave] 
         You choose to go home and later found out what happened from other students. Maybe you should've stayed to witness all the interesting stuff?
+        <b>The end. <\b>
         -> END
 
 = Beginning
@@ -161,6 +163,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
     {
     - RANDOM(1, 10) > 7 : -> Done2
     - else : You got caught cheating! You are eliminated!
+            <b>The end. <\b>
             -> END
     }  
 
@@ -219,10 +222,12 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
             { Luck >= Courage:
                 Ok, one more chance
                 ~ Lives++
-                -> END
+                   *[Try to solve it yourself] -> Instruction_2.solveLightChallengeByYourself
+                   *[Wait for someone else to solve it] -> Instruction_2.someElseSolvesLightChallenge
             - else:
                 No, a mistake is a mistake, you don't follow the rules
-                -> Next2
+                <b>The end. <\b>
+                -> END
             }
             
             *[Don't acknowledge your mistake]
@@ -234,6 +239,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
                 **[Next]-> Next2 
                 = Next2
                 That was it, you are not allowed to continue the game!
+                <b>The end. <\b>
                 -> END
             
     = Disagree
@@ -279,7 +285,7 @@ You think about it a little. The panel seems suspicious enough. But most suspici
 # CLEAR
 Hm... After a close inspection, you don't see anything weird.
     ~Time++
-    * [Try again]-> solveLightChallengeByYourself
+    + [Try again]-> solveLightChallengeByYourself
 
 =seeCable
 # CLEAR
@@ -368,17 +374,20 @@ You must open the door, you have {(15- Time)*4}  minutes left; You need to find 
         You are named as the best student, 
         you receive a prize.
          # IMAGE: images/30.jpg
+         <b>The end. <\b>
         -> END
         
     -else:
-        You are just awarded.
+        You received an honorary mention. You could have done better.
          # IMAGE: images/31.jpg
+         <b>The end. <\b>
         -> END
     }
  
 =Someone_solved
     Someone else solved the problem while you were searching for the key.
-    You are one of the students who tried to win.
+    You are one of the students who tried to win. Unfortunately, someone was faster than you.
+    <b>The end. <\b>
       -> END
       
 =Gather_team
@@ -402,14 +411,17 @@ You must open the door, you have {(15- Time)*4}  minutes left; You need to find 
     - SocialState>=6 and Courage>3:
         Your team was awarded and declared the best PBL team and the bravest.
          # IMAGE: images/32.jpg
+         <b>The end. <\b>
         -> END
     - SocialState>=6 and Courage<=3:  
         Your team was awarded and declared the best PBL team.
          # IMAGE: images/34.jpg
+         <b>The end. <\b>
         -> END
     -else:
         Your team was just  awarded
          # IMAGE: images/33.png
+         <b>The end. <\b>
         -> END
     }
 
@@ -418,6 +430,7 @@ You must open the door, you have {(15- Time)*4}  minutes left; You need to find 
     Another team found the key.
      # IMAGE: images/28.jpg
     *[Next] You are one of the students who tried to win.
+    <b>The end. <\b>
     -> END
     
 =Solve_problem
@@ -441,15 +454,18 @@ You must open the door, you have {(15- Time)*4}  minutes left; You need to find 
                 You are named as the best student, 
                 you receive a prize.
                  # IMAGE: images/30.jpg
+                 <b>The end. <\b>
                 -> END
             - SocialState<5 :  
-                You are just awarded.
+                You received an honorary mention. You could have done better.
                  # IMAGE: images/31.jpg
+                 <b>The end. <\b>
                 -> END
             -SocialState>=5 and Courage>4:
                 You are named as the best student and the the bravest, 
                 you receive a prize.
                  # IMAGE: images/29.png
+                 <b>The end. <\b>
                 -> END
             }
     
@@ -478,7 +494,7 @@ You must open the door, you have {(15- Time)*4}  minutes left; You need to find 
         ~Time++
         Unfortunately the elevators are too crowded and you fail to use them.
          # IMAGE:  images/26.jpg
-        ->Discuss
+        *[Next]->Discuss
     
     }
      =winning
@@ -495,15 +511,18 @@ You must open the door, you have {(15- Time)*4}  minutes left; You need to find 
            You are named as the best student, 
             you receive a prize.
              # IMAGE: images/30.jpg
+             <b>The end. <\b>
             -> END
         - SocialState<5 :  
-            You are just awarded.
+            You received an honorary mention. You could have done better.
              # IMAGE: images/31.jpg
+             <b>The end. <\b>
             -> END
         -SocialState>=5 and Courage>2:
             You are named as the best student and the the bravest,
             you receive a prize.
              # IMAGE: images/29.png
+             <b>The end. <\b>
             -> END
         }
          
@@ -536,6 +555,7 @@ You must open the door, you have {(15- Time)*4}  minutes left; You need to find 
     {
         - Time>15:
             Time is out, you didn't win!
+            <b>The end. <\b>
             -> END
         -else: ->MrDean_Meeting
         
@@ -549,6 +569,7 @@ You must open the door, you have {(15- Time)*4}  minutes left; You need to find 
         {
             - Time>15:
                 Time is out, you didn't win!
+                <b>The end. <\b>
                 -> END
         }
     *[Next]The student wants to convince it's you who stole the key from them!
@@ -556,38 +577,33 @@ You must open the door, you have {(15- Time)*4}  minutes left; You need to find 
         - Lives>1:
             Mr. Dean actually saw how the key fell from you pocket as he was drinking his water.
             You succesfuly opened the door!
-            - SocialState>=7 and Courage<=4:
-                You are named as the best student, 
-                    you receive a prize.
-                 # IMAGE:  images/30.jpg
-                -> END
-            - SocialState<7 :
-                You are just awarded.
-                 # IMAGE:  images/31.jpg
-                -> END
-            - SocialState>=7 and Courage>4:
-                You are named as the best student and the the bravest, you receive a prize.
-                 # IMAGE:  images/29.png
-                -> END
-        - else:
-            Mr Dean Believes the student and you are disqualified!
+            {
+                - SocialState>=7 and Courage<=4:
+                    # CLEAR
+                    You are named as the best student, 
+                        you receive a prize.
+                     # IMAGE:  images/30.jpg
+                     <b>The end. <\b>
+                    -> END
+                - SocialState<7 :
+                     # CLEAR
+                    You received an honorary mention. You could have done better.
+                     # IMAGE:  images/31.jpg
+                     <b>The end. <\b>
+                    -> END
+                - SocialState>=7 and Courage>4:
+                    # CLEAR
+                    You are named as the best student and the the bravest, you receive a prize.
+                     # IMAGE:  images/29.png
+                     <b>The end. <\b>
+                    -> END
             }
+            
+        - else:
+            Mr Dean Believes the student and you are <b>disqualified<\b>!
+            <b>The end. <\b>
             -> END
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+     
 
 -> END
