@@ -5,6 +5,7 @@ VAR Luck = 0
 VAR SocialState = 3
 VAR Time = 0
 VAR Lives = 1
+VAR VerifyOption = false
 
 -> PARTY_INVITATION
 
@@ -190,10 +191,10 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
         
     = Not_The_First
     # CLEAR
-    You are not the first, you should wait your turn
+    You are not the first, you should wait your turn.
     ~ Time++
     ~ Time++
-        *[Waited] -> Next_Instruction
+        *[Wait] -> Next_Instruction
     
     = Next_Instruction
     # CLEAR
@@ -207,9 +208,12 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
             *[You will wait until somebody has an idea, and stole the opportunity, so be the first (as that student did to you)] -> Stole_The_Opportunity
             *[You will wait until somebody solves the problem]
             ->Instruction_2.someElseSolvesLightChallenge
-            *[You will try to come up with a solution]
-            ->Instruction_2.solveLightChallengeByYourself
+            *[You will try to come up with a solution] -> solveChallengeYourselfVerified
+            
 
+        =solveChallengeYourselfVerified
+            ~VerifyOption = true
+            ->Instruction_2.solveLightChallengeByYourself
         
         = Stole_The_Opportunity
         # CLEAR
@@ -225,7 +229,7 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
                    *[Try to solve it yourself] -> Instruction_2.solveLightChallengeByYourself
                    *[Wait for someone else to solve it] -> Instruction_2.someElseSolvesLightChallenge
             - else:
-                No, a mistake is a mistake, you don't follow the rules
+                No, a mistake is a mistake, you didn't follow the rules
                 <b>The end. <\b>
                 -> END
             }
@@ -268,10 +272,20 @@ Solve the given <b>formula</b> to enter the <b>computer's password</b> where you
 
 ===Instruction_2
 
-=solveLightChallengeByYourself
-# CLEAR
-#IMAGE: images/15.jpg
-~Courage = Courage + 2
+=verifyProblem
+*[Figure out the problem by yourself] 
+   No need for outsider help!
+    ~ Courage++
+*[Ask somebody if they see a problem]
+    They tell you it's probably something to do with the cables.
+    ~ Luck++
+
+- -> challenge2Options
+
+
+
+=challenge2Options
+
 You think about it a little. The panel seems suspicious enough. But most suspicious you find the:
 
 +[Buttons on the panel] -> wrongChoice
@@ -281,11 +295,25 @@ You think about it a little. The panel seems suspicious enough. But most suspici
     
 +[Cables coming out of the panel box] -> wrongChoice
 
+=solveLightChallengeByYourself
+# CLEAR
+#IMAGE: images/15.jpg
+
+
+{
+- VerifyOption: 
+    ~Courage++
+    -> verifyProblem
+- else: 
+    ~Courage = Courage + 2 // 
+}
+
+
 =wrongChoice
 # CLEAR
 Hm... After a close inspection, you don't see anything weird.
     ~Time++
-    + [Try again]-> solveLightChallengeByYourself
+    + [Try again]-> challenge2Options
 
 =seeCable
 # CLEAR
